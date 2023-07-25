@@ -1,93 +1,323 @@
-import { useState } from "react";
-import "./App.css";
-import sun from "./sun.png";
-import sun1 from "./sun (1).png";
-import cloudy from "./cloudy-day.png";
-import haze from "./haze.png";
-import rainy from "./rainy-day.png";
-import storm from "./storm.png";
+.body{
+  background-image:url("./bg.jpeg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:744px;
 
-var id   ;
-function App(props) {
-  const [city, setCity] = useState("Delhi");
-  const [search, setSearch] = useState("Delhi");
-  const [temp, setTemp] = useState("28°C");
-  const [desc, setDesc] = useState("cloudy");
-  const [speed, setSpeed] = useState("250");
-  const [weathers, setweathers] = useState({});
+}
+.cloudy{
+  background-image:url("./cloudybg.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:744px;
+}
+.rainy{
+  background-image:url("./rainybg.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:744px;
+}
+.storm{
+  background-image:url("./storm.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:744px;
+}
+.wetherBg{
 
+ padding :40px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+ 
+ 
 
-  const valueofsearchbox = (event) => {
-    setSearch(event.target.value);
-  };
-    const tellme = () => {
-    let a = " " + search;
-      let b = a.length;
-      let c = "";
-      for (let i = 0; i < b; i++) {
-        if (a.charAt(i) == " ") {
-          c = c + a.charAt(i + 1).toUpperCase();
-        } else if (a.charAt(i) != " ") {
-          c = c + a.charAt(i + 1);
-        }
-      }
-    setCity(c);
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=4fc29c297a8262f72916963077e74a0e`
-    )
-      .then((apidata) => {
-        let actualdata = apidata.json();
-        return actualdata;
-      })
-      .then((actualdata) => {
-        console.log(actualdata);
-        setweathers(actualdata);
-        let temp = Math.round(actualdata.main.temp);
-        id=actualdata.weather[0].id;
-        console.log(id);
-        setTemp(temp - 273 + "°C");
-
-          let desc = actualdata.weather[0].main;
-          console.log(actualdata.weather[0].main)
-          setDesc(desc);
-          let speed = actualdata.wind.speed;
-          setSpeed(speed);
-      })
-      .catch((error) => {
-        setTemp("place does not exsist");
-      });
-  };
-  return (
-    <>
-   <section className={(typeof weathers.main != undefined)?((id>=600)?'body': (id>=500)?'rainy':(id>=400)?'rainy':(id>=300)?'cloudy':(id>=200)?'storm':'body'):'body'}>
-        <div className="col-md-12">
-          <div className="wetherBg">
-            <h1 className="heading">WEATHER APP</h1>
-            <div className="d-grid  gap-3 col-4 mt-4">
-              <input
-                style={{ color: "black" }}
-                onChange={valueofsearchbox}
-                className="form-control"
-              />
-              <button onClick={tellme} className="btn btn-primary" type="button">Search</button>
-            </div>
-          </div>
-
-          <div className="col-md-12 text-center">
-            <div className="shadow rounded wetherResultBox">
-              <img className="icon" src={(typeof weathers.main != undefined)?((id>=700)?sun:(id>=600)?sun1:(id>=500)?rainy:(id>=400)?rainy:(id>=300)?cloudy:(id>=200)?storm:sun):sun} />
-              <h1 className="city">{city}</h1>
-              <h1 className="temp"> {temp}</h1>
-              <h1 className="desc">{desc}</h1>
-              <h1 className="desc"><span style={{fontSize:"30" , color:"gainsboro"}}>windSpeed: </span>{speed}<span> km/hr</span></h1>
-            </div>
-          </div>
-
-        
-        </div>
-      </section>
-    </>
-  );
+}
+.btn-primary {
+  color: #212529;
+  background: #00B4CC;
+    border-color: #7cc;
+    height:55px;
+    font-size: 1.5rem;
+    
 }
 
-export default App;
+
+.heading{
+  color:white;
+  font-weight: 700;
+}
+.form-control{
+  font-size: 1.5rem;
+ 
+}
+
+.wetherResultBox{
+  margin: 40px 540px;
+  height: 330px;
+  width:500px;
+}
+.icon{
+  margin-top: 0.5rem;
+  width:100px;
+  height:80px;
+}
+.city{
+  font-size:35px;
+  font-weight:bolder;
+  color:rgb(24, 24, 45)
+}
+.temp{
+  font-size:45px;
+  font-weight:4500;
+  color:rgb(24, 24, 45)
+
+}
+.desc{
+  font-size:40px;
+  font-weight:4500;
+  color:rgb(248, 248, 248)
+  
+}
+
+
+
+@media (max-width:500px){
+  .wetherBg {
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: -97px;
+}
+  .wetherResultBox {
+    margin: 40px 540px;
+    height: 400px;
+    width: 500px;
+    margin-left: -39px;
+}
+.body{
+  background-image:url("./bg.jpeg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1099px;
+  width:500px;
+
+}
+.cloudy{
+  background-image:url("./cloudybg.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1099px;
+  width:500px;
+}
+.rainy{
+  background-image:url("./rainybg.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1099px;
+  width:500px;
+}
+.storm{
+  background-image:url("./storm.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1099px;
+  width:500px;
+}
+}
+@media(max-width:400px){
+  
+  .wetherBg {
+    padding: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: -97px;
+}
+  .body{
+    background-image:url("./bg.jpeg") ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    height:1399px;
+    width:500px;
+  
+  }
+  .cloudy{
+    background-image:url("./cloudybg.jpg") ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    height:1099px;
+    width:500px;
+  }
+  .rainy{
+    background-image:url("./rainybg.jpg") ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    height:1099px;
+    width:500px;
+  }
+  .storm{
+    background-image:url("./storm.jpg") ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    height:1099px;
+    width:500px;
+  }
+}
+@media(max-width:300px){
+  .wetherBg {
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: -97px;
+}
+  .body{
+    background-image:url("./bg.jpeg") ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    height:1599px;
+    width:500px;
+  
+  }
+  .cloudy{
+    background-image:url("./cloudybg.jpg") ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    height:1099px;
+    width:500px;
+  }
+  .rainy{
+    background-image:url("./rainybg.jpg") ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    height:1099px;
+    width:500px;
+  }
+  .storm{
+    background-image:url("./storm.jpg") ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    height:1099px;
+    width:500px;
+  }
+}
+@media (max-width:1000px) and (min-width:500px){
+  .wetherBg {
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: -140px;
+}
+  .wetherResultBox {
+    margin: 40px 540px;
+    height: 310px;
+    width: 500px;
+    margin-left: 175px;
+}
+.body{
+  background-image:url("./bg.jpeg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1450px;
+  width:1000px;
+
+}
+.cloudy{
+  background-image:url("./cloudybg.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1450px;
+  width:1000px;
+}
+.rainy{
+  background-image:url("./rainybg.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1450px;
+  width:1000px;
+}
+.storm{
+  background-image:url("./storm.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1450px;
+  width:1000px;
+}
+}
+@media (max-width:1500px) and (min-width:1000px){
+  .wetherBg {
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: -145px;
+}
+  .wetherResultBox {
+    margin: 40px 540px;
+    height: 310px;
+    width: 500px;
+    margin-left: 328px;
+}
+.body{
+  background-image:url("./bg.jpeg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1450px;
+  width:1300px;
+
+}
+.cloudy{
+  background-image:url("./cloudybg.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1450px;
+  width:1300px;
+}
+.rainy{
+  background-image:url("./rainybg.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1450px;
+  width:1300px;
+}
+.storm{
+  background-image:url("./storm.jpg") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  height:1450px;
+  width:1300px;
+}
+}
